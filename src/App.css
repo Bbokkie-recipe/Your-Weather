@@ -22,10 +22,12 @@ body{
 }
 
 .weather-info{
-	width: 500px;
+	width: 800px;
 	border: 3px solid #aec6fe;
+	border-radius: 10px;
 	color: white;
-	padding: 50px;
+	background-color:rgba(108, 144, 202, 0.4);
+	padding: 100px;
 }
 
 .weather-info-text {
