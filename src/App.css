@@ -33,6 +33,7 @@ body{
 .weather-info-text {
 	width: 100%;
 	text-align: center;
+	padding: 3px;
 }
 
 .cityButtonGroup{

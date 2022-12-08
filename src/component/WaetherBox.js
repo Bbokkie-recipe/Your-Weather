@@ -1,12 +1,12 @@
 import React from 'react'
 
-const WaetherBox = () => {
+const WaetherBox = ({ weather }) => {
 	return (
 		<div className='weather-info-parents'>
 			<div className='weather-info'>
-				<div className='weather-info-text'>Your Weather</div>
-				<h2 className='weather-info-text'>30도 / 230 화씨</h2>
-				<h2 className='weather-info-text'>맑은 하늘</h2>
+				<div className='weather-info-text'>{weather?.name}</div>
+				<h2 className='weather-info-text'>지금 온도 {weather?.main?.temp} / 습도 {weather?.main?.humidity}</h2>
+				<h2 className='weather-info-text'>{weather?.weather[0]?.description}</h2>
 			</div>
 		</div>
 	)
