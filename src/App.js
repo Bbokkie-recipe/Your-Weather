@@ -11,6 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
 	const [userWeather, setUserWeather] = useState(null);
+	const cities = ['Your Weather', 'NewYork', 'Toronto', 'Paris', 'Rondon'];
 
 	const getCurrentLocation = () => {
 		if (navigator.geolocation) {
@@ -26,7 +27,7 @@ function App() {
 
 	//await 쓰고자 하는 함수는 async 여야 한다! 
 	const getWeatherByCurrentLocation = async (lat, lon) => {
-		let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=&units=metric`;
+		let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=b13282392fd34dd9436686c7c7ecda83&units=metric`;
 		let response = await fetch(url) //비동기(직독: url을 patch하는 것을 기다려달라!) : url 로딩한 뒤 응답값을 받기로 함
 		let data = await response.json(); //응답에서 json 추출하는 것을 기다려달라
 		setUserWeather(data);
@@ -40,16 +41,8 @@ function App() {
 	return (
 		<div>
 			<div className='main'>
-
 				<WeatherBox weather={userWeather} />
-
-				<div className='cityButtonGroup'>
-					<WeatherButton title="Your Weather" />
-					<WeatherButton title="NewYork" />
-					<WeatherButton title="Toronto" />
-					<WeatherButton title="Paris" />
-					<WeatherButton title="Rondon" />
-				</div>
+				<WeatherButton cities={cities} />
 			</div>
 			<div>
 			</div>

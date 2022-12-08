@@ -1,10 +1,10 @@
 import React from 'react'
 import { Button } from 'react-bootstrap';
 
-const WeatherButton = (props) => {
+const WeatherButton = ({ cities }) => {
 	return (
-		<div>
-			<Button variant="primary">{props.title}</Button>
+		<div className='cityButtonGroup'>
+			{cities.map((item) => (<Button variant="primary">{item}</Button>))}
 		</div>
 	)
 }
