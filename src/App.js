@@ -2,6 +2,7 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import WeatherBox from "./component/WaetherBox";
 import WeatherButton from "./component/WeatherButton";
+import ClipLoader from "react-spinners/ClipLoader";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 //1. 앱이 실행되자마자 현재 위치 기반의 날씨가 보인다.
@@ -13,6 +14,8 @@ function App() {
 	const [userWeather, setUserWeather] = useState(null);
 	const [city, setCity] = useState("Your Weather");
 	const cities = ['Your Weather', 'new york', 'toronto', 'paris', 'rondon'];
+	let [loading, setLoading] = useState(false);
+
 
 	const getCurrentLocation = () => {
 		if (navigator.geolocation) {
@@ -29,18 +32,21 @@ function App() {
 	//await 쓰고자 하는 함수는 async 여야 한다! 
 	const getWeatherByCurrentLocation = async (lat, lon) => {
 		let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=b13282392fd34dd9436686c7c7ecda83&units=metric`;
+		setLoading(true);
 		let response = await fetch(url) //비동기(직독: url을 patch하는 것을 기다려달라!) : url 로딩한 뒤 응답값을 받기로 함
 		let data = await response.json(); //응답에서 json 추출하는 것을 기다려달라
 		setUserWeather(data);
+		setLoading(false);
 		console.log(data);
 	}
 
 	const getWeatherByCity = async () => {
 		let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=b13282392fd34dd9436686c7c7ecda83&units=metric`;
-		//
+		setLoading(true);
 		let response = await fetch(url) //비동기(직독: url을 patch하는 것을 기다려달라!) : url 로딩한 뒤 응답값을 받기로 함
 		let data = await response.json(); //응답에서 json 추출하는 것을 기다려달라
 		setUserWeather(data);
+		setLoading(false);
 		console.log(data);
 	}
 
@@ -56,8 +62,15 @@ function App() {
 	return (
 		<div>
 			<div className='main'>
+				<ClipLoader className='react-spinners'
+					color="#ffffff"
+					loading={loading}
+					size={150}
+					aria-label="Loading Spinner"
+					data-testid="loader"
+				/>
 				<WeatherBox weather={userWeather} />
-				<WeatherButton cities={cities} setCity={setCity} />
+				<WeatherButton cities={cities} setCity={setCity} loading={loading} setLoading={setLoading} />
 			</div>
 			<div>
 			</div>

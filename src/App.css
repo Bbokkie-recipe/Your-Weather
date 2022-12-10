@@ -45,3 +45,10 @@ body{
 	width: 100%;
 	overflow: hidden;
 }
+
+.react-spinners{
+	position:absolute;
+	width: 100%;
+	top: 30%;
+	left: 47%;
+}
