@@ -61,7 +61,7 @@ function App() {
 
 	return (
 		<div>
-			<div className='main'>
+			{loading ? <div className='main'>
 				<ClipLoader className='react-spinners'
 					color="#ffffff"
 					loading={loading}
@@ -69,9 +69,13 @@ function App() {
 					aria-label="Loading Spinner"
 					data-testid="loader"
 				/>
-				<WeatherBox weather={userWeather} />
+				<WeatherBox weather={null} />
 				<WeatherButton cities={cities} setCity={setCity} loading={loading} setLoading={setLoading} />
-			</div>
+			</div> :
+				<div className='main'>
+					<WeatherBox weather={userWeather} />
+					<WeatherButton cities={cities} setCity={setCity} loading={loading} setLoading={setLoading} />
+				</div>}
 			<div>
 			</div>
 		</div >
